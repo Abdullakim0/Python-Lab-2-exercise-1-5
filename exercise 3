@@ -1,0 +1,14 @@
+from collections import Counter
+
+with open("your_text_file.txt", "r") as file:
+    words = file.read().split()
+
+# a) Sorted alphabetically
+alphabetically_sorted = sorted(set(words))
+
+# b) Sorted by frequency of occurrence
+frequency_sorted = sorted(words, key=Counter(words).get, reverse=True)
+
+# c) Longest word that appears only once
+unique_words = [word for word, count in Counter(words).items() if count == 1]
+longest_unique_word = max(unique_words, key=len, default=None)
