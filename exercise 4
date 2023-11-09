@@ -1,0 +1,18 @@
+import json
+from functools import reduce
+
+# Load data from data_zad4.json
+with open("data_zad4.json", "r") as file:
+    sales_data = json.load(file)
+
+# a) Calculate the net value of each sale
+net_values = list(map(lambda sale: sale['quantity'] * sale['unit_price'], sales_data))
+
+# b) Calculate the gross value of each sale
+gross_values = list(map(lambda net_value: net_value + (net_value * sale['tax_rate']), net_values))
+
+# c) Leave only products sold in quantities greater than 80 pieces
+filtered_sales = list(filter(lambda sale: sale['quantity'] > 80, sales_data))
+
+# d) Calculate the total gross income from sales of products sold over 80 pieces
+total_gross_income = reduce(lambda acc, sale: acc + sale['quantity'] * sale['unit_price'] * (1 + sale['tax_rate']), filtered_sales, 0)
