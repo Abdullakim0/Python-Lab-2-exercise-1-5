@@ -1,0 +1,9 @@
+# Similar to Task 4, but adapted for exam results
+# a) Give an appropriate rating
+ratings = list(map(lambda result: 2 if result['percentage'] <= 50 else 3 if 51 <= result['percentage'] <= 60 else 3.5, results))
+
+# b) Leave only results with an unsatisfactory grade
+failed_results = list(filter(lambda result: result['grade'] == 'Unsatisfactory', results))
+
+# c) Return students with failed exams as a dictionary list
+failed_students = reduce(lambda acc, result: acc + [{result['name_surname']: result['number_of_failed_exams']}], failed_results, [])
