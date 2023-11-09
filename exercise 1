@@ -1,0 +1,15 @@
+# Custom map function
+def my_map(func, iterable):
+    return [func(item) for item in iterable]
+
+# Custom filter function
+def my_filter(func, iterable):
+    return [item for item in iterable if func(item)]
+
+# Custom reduce function
+def my_reduce(func, iterable, initial=None):
+    accumulator = initial if initial is not None else iterable[0]
+    iterable = iterable[1:] if initial is not None else iterable
+    for item in iterable:
+        accumulator = func(accumulator, item)
+    return accumulator
